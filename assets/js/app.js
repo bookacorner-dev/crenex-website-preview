@@ -125,34 +125,34 @@
 
   document.querySelectorAll('[data-roi]').forEach(calculator => {
     const inputs = Array.from(calculator.querySelectorAll('input[type="range"]'));
+    const scenarios = Array.from(calculator.querySelectorAll('.roi-scenarios input[type="radio"]'));
     const integer = new Intl.NumberFormat('en-US',{maximumFractionDigits:0});
     const decimal = new Intl.NumberFormat('en-US',{maximumFractionDigits:1});
     const currency = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',currencyDisplay:'code',maximumFractionDigits:0});
     const money = value => currency.format(Math.round(value)).replace(/[\u00a0\u202f]/g,' ');
     const outputs = new Map(inputs.map(input => [input.name, calculator.querySelector('[data-output="' + input.name + '"]')]));
+    const scenarioCopy = calculator.querySelector('[data-scenario-copy]');
     const results = {
       revenue: calculator.querySelector('[data-result="revenue"]'),
       baseline: calculator.querySelector('[data-result="baseline"]'),
-      hours: calculator.querySelector('[data-result="hours"]'),
-      multiple: calculator.querySelector('[data-result="multiple"]'),
-      payback: calculator.querySelector('[data-result="payback"]')
+      bookings: calculator.querySelector('[data-result="bookings"]'),
+      monthly: calculator.querySelector('[data-result="monthly"]'),
+      additionalBookings: calculator.querySelector('[data-result="additionalBookings"]')
     };
 
     function renderRoi(){
       const values = Object.fromEntries(inputs.map(input => [input.name, Number(input.value)]));
+      const selectedScenario = scenarios.find(input => input.checked);
+      const opportunityRate = selectedScenario ? Number(selectedScenario.value) : 5;
       inputs.forEach(input => {
         const output = outputs.get(input.name);
         if(!output) return;
-        if(input.name === 'avgDeal' || input.name === 'annualCost') output.textContent = money(values[input.name]);
-        else if(input.name === 'lift') output.textContent = values[input.name] + '%';
+        if(input.name === 'avgDeal') output.textContent = money(values[input.name]);
         else output.textContent = decimal.format(values[input.name]);
         const accessibleValues = {
           assets: decimal.format(values.assets) + ' shopping centres',
           deals: decimal.format(values.deals) + ' bookings per centre per year',
-          avgDeal: money(values.avgDeal) + ' average booking value',
-          lift: decimal.format(values.lift) + ' percent potential revenue lift',
-          hours: decimal.format(values.hours) + ' admin hours saved per booking',
-          annualCost: money(values.annualCost) + ' illustrative annual investment'
+          avgDeal: money(values.avgDeal) + ' average booking value'
         };
         input.setAttribute('aria-valuetext',accessibleValues[input.name]);
         const range = Number(input.max) - Number(input.min);
@@ -160,23 +160,23 @@
         input.style.setProperty('--range-progress', progress + '%');
       });
 
-      const baseline = values.assets * values.deals * values.avgDeal;
-      const upside = baseline * (values.lift / 100);
-      const hoursSaved = values.assets * values.deals * values.hours;
-      const multiple = values.annualCost ? upside / values.annualCost : 0;
-      const modelIsValid = Number.isFinite(baseline) && Number.isFinite(upside) && Number.isFinite(hoursSaved) && values.annualCost > 0 && upside > 0;
-      const crossoverMonths = modelIsValid ? (values.annualCost / upside) * 12 : 0;
-      const multipleLabel = !modelIsValid ? '—' : multiple < .1 ? '<0.1×' : multiple > 999 ? '999×+' : multiple.toFixed(1) + '×';
-      const crossoverLabel = !modelIsValid ? '—' : crossoverMonths < 1 ? '<1 mo' : crossoverMonths > 60 ? '>5 yrs' : Math.ceil(crossoverMonths) + ' mo';
+      const annualBookings = values.assets * values.deals;
+      const baseline = annualBookings * values.avgDeal;
+      const opportunity = baseline * (opportunityRate / 100);
+      const additionalBookings = annualBookings * (opportunityRate / 100);
+      const scenarioNames = {2:'Conservative',5:'Balanced',8:'Growth'};
+      const additionalBookingsLabel = additionalBookings < 10 ? decimal.format(additionalBookings) : integer.format(Math.round(additionalBookings));
 
-      if(results.revenue) results.revenue.textContent = money(upside);
+      if(scenarioCopy) scenarioCopy.textContent = 'Models a ' + opportunityRate + '% improvement in captured annual booking value (' + (scenarioNames[opportunityRate] || 'selected') + ' scenario).';
+      if(results.revenue) results.revenue.textContent = money(opportunity);
       if(results.baseline) results.baseline.textContent = money(baseline);
-      if(results.hours) results.hours.textContent = decimal.format(hoursSaved);
-      if(results.multiple) results.multiple.textContent = multipleLabel;
-      if(results.payback) results.payback.textContent = crossoverLabel;
+      if(results.bookings) results.bookings.textContent = integer.format(annualBookings);
+      if(results.monthly) results.monthly.textContent = money(opportunity / 12);
+      if(results.additionalBookings) results.additionalBookings.textContent = additionalBookingsLabel;
     }
 
     inputs.forEach(input => input.addEventListener('input', renderRoi));
+    scenarios.forEach(input => input.addEventListener('change', renderRoi));
     renderRoi();
   });
 

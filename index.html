@@ -3,10 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Crenex — Short-term &amp; Specialty Leasing Software</title>
-<meta name="description" content="Manage spaces, enquiries, approvals, agreements, billing and reporting in one short-term leasing workflow across your portfolio."/>
+<title>Crenex | Short-Term &amp; Specialty Leasing Software</title>
+<meta name="description" content="Manage enquiries, approvals, agreements, billing and reporting in one connected workflow for short-term and specialty leasing across your portfolio."/>
+<meta name="robots" content="noindex,follow,max-image-preview:large"/><meta name="author" content="Crenex"/><meta name="theme-color" content="#0a0d12"/>
+<link rel="canonical" href="https://crenex.io/"/>
+<meta property="og:type" content="website"/><meta property="og:site_name" content="Crenex"/><meta property="og:locale" content="en_US"/><meta property="og:title" content="Crenex | Short-Term &amp; Specialty Leasing Software"/><meta property="og:description" content="Manage enquiries, approvals, agreements, billing and reporting in one connected workflow for short-term and specialty leasing."/><meta property="og:url" content="https://crenex.io/"/><meta property="og:image" content="https://bookacorner-dev.github.io/crenex-website-preview/assets/brand/crenex-social-card.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Crenex short-term leasing platform dashboard"/>
+<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Crenex | Short-Term &amp; Specialty Leasing Software"/><meta name="twitter:description" content="From enquiry to invoice across your real estate portfolio."/><meta name="twitter:image" content="https://bookacorner-dev.github.io/crenex-website-preview/assets/brand/crenex-social-card.jpg"/>
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin/><link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="icon" href="assets/brand/crenex-mark-electric.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="assets/css/styles.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://crenex.io/#organization","name":"Crenex","legalName":"Book A Corner Sociedad Limitada","url":"https://crenex.io/","logo":"https://crenex.io/assets/brand/crenex-logo-ink.svg","email":"gaston@crenex.io","address":{"@type":"PostalAddress","streetAddress":"Calle del Gobernador, 23","postalCode":"28014","addressLocality":"Madrid","addressCountry":"ES"}},{"@type":"WebSite","@id":"https://crenex.io/#website","url":"https://crenex.io/","name":"Crenex","publisher":{"@id":"https://crenex.io/#organization"},"inLanguage":"en"},{"@type":"SoftwareApplication","name":"Crenex","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Short-term and specialty leasing software for multi-asset real estate portfolios.","publisher":{"@id":"https://crenex.io/#organization"}}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -17,11 +23,11 @@
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <div class="nav-links">
         <a href="platform.html">Platform</a>
-        <a href="workflow.html">Workflow</a>
+        <a href="workflow.html">Operations</a>
         <a href="listing.html">Listing</a>
         <a href="industries.html">Use cases</a>
         <a href="customers.html">Customers</a>
-        <a href="roi-calculator.html">ROI</a>
+        
         <a href="mri-integration.html">MRI</a>
       </div>
       <div class="nav-actions"><a class="btn btn-primary" href="demo.html">Book a demo</a></div>
@@ -57,7 +63,7 @@
         <span class="approved-logo"><img src="assets/logos/ingka.svg" alt="Ingka Centres"/></span>
         <span class="approved-logo"><img src="assets/logos/cygnet-west.png" alt="Cygnet West"/></span>
         <span class="approved-logo"><img src="assets/logos/fawkner.png" alt="Fawkner Property"/></span>
-        <span class="approved-logo mri"><img src="assets/logos/mri-software.png" alt="MRI Software"/></span>
+        <span class="approved-logo mri"><img src="assets/logos/mri-software-color.svg" alt="MRI Software"/></span>
       </div>
     </div>
   </section>
@@ -110,32 +116,38 @@
   <section class="section roi-feature" id="roi-calculator">
     <div class="container">
       <div class="section-header roi-heading">
-        <div><p class="eyebrow">ROI calculator</p><h2>Build the business case for your portfolio.</h2></div>
-        <div><p class="lead">Adjust the operating assumptions to explore potential revenue upside, time savings and the investment comparison.</p><a class="text-link" href="roi-calculator.html">Open the full calculator →</a></div>
+        <div><p class="eyebrow">ROI calculator</p><h2>Estimate the opportunity in your portfolio.</h2></div>
+        <div><p class="lead">Use three figures your team already knows, then compare transparent booking-value scenarios—without guessing time savings or software costs.</p><a class="text-link" href="roi-calculator.html">Open the full calculator →</a></div>
       </div>
       <div class="roi-shell" data-roi>
         <div class="roi-controls">
-          <p class="eyebrow">Your assumptions</p>
-          <h3>Model an annual scenario.</h3>
+          <p class="eyebrow">Your portfolio</p>
+          <h3>Start with figures already in your reports.</h3>
           <div class="range-row"><label for="home-roi-assets">Shopping centres <output for="home-roi-assets" data-output="assets"></output></label><input id="home-roi-assets" aria-describedby="home-roi-note" max="300" min="1" name="assets" type="range" value="80"/></div>
           <div class="range-row"><label for="home-roi-deals">Bookings per centre / year <output for="home-roi-deals" data-output="deals"></output></label><input id="home-roi-deals" aria-describedby="home-roi-note" max="80" min="1" name="deals" type="range" value="12"/></div>
           <div class="range-row"><label for="home-roi-avg">Average booking value <output for="home-roi-avg" data-output="avgDeal"></output></label><input id="home-roi-avg" aria-describedby="home-roi-note" max="80000" min="1000" name="avgDeal" step="1000" type="range" value="10000"/></div>
-          <div class="range-row"><label for="home-roi-lift">Potential revenue lift <output for="home-roi-lift" data-output="lift"></output></label><input id="home-roi-lift" aria-describedby="home-roi-note" max="25" min="1" name="lift" type="range" value="5"/></div>
-          <div class="range-row"><label for="home-roi-hours">Admin hours saved / booking <output for="home-roi-hours" data-output="hours"></output></label><input id="home-roi-hours" aria-describedby="home-roi-note" max="12" min="0" name="hours" step="0.5" type="range" value="2"/></div>
-          <div class="range-row"><label for="home-roi-cost">Illustrative annual investment <output for="home-roi-cost" data-output="annualCost"></output></label><input id="home-roi-cost" aria-describedby="home-roi-note" max="500000" min="25000" name="annualCost" step="5000" type="range" value="120000"/></div>
-          <p class="note" id="home-roi-note">Illustrative scenario, not a forecast or traditional ROI or payback calculation. Revenue upside is gross booking value; implementation time, ramp, margin and the financial value of hours saved are excluded.</p>
+          <fieldset class="roi-scenarios" aria-describedby="home-roi-note">
+            <legend>Opportunity scenario</legend>
+            <div class="roi-scenario-options">
+              <label><input type="radio" name="home-roi-scenario" value="2"/><span><b>Conservative</b><small>2%</small></span></label>
+              <label><input type="radio" name="home-roi-scenario" value="5" checked/><span><b>Balanced</b><small>5%</small></span></label>
+              <label><input type="radio" name="home-roi-scenario" value="8"/><span><b>Growth</b><small>8%</small></span></label>
+            </div>
+            <p data-scenario-copy>Models a 5% improvement in captured annual booking value.</p>
+          </fieldset>
+          <p class="note" id="home-roi-note">The selected percentage is a transparent scenario applied to baseline annual booking value—not a forecast or a claimed Crenex result. Pricing, margin, implementation and labor savings are excluded.</p>
         </div>
         <div class="roi-output">
-          <p class="eyebrow">Illustrative annual revenue upside</p>
+          <p class="eyebrow">Illustrative annual opportunity</p>
           <h2 data-result="revenue" role="status" aria-live="polite" aria-atomic="true">USD 0</h2>
-          <p>Potential additional booking value from improving capture, conversion and bookable inventory visibility.</p>
+          <p>Additional gross booking value if the selected scenario were achieved.</p>
           <div class="roi-metrics">
             <div class="roi-metric"><b data-result="baseline">USD 0</b><span>baseline booking value</span></div>
-            <div class="roi-metric"><b data-result="hours">0</b><span>admin hours saved</span></div>
-            <div class="roi-metric"><b data-result="multiple">0×</b><span>upside / investment</span></div>
-            <div class="roi-metric"><b data-result="payback">—</b><span>gross-value crossover</span></div>
+            <div class="roi-metric"><b data-result="bookings">0</b><span>annual bookings modelled</span></div>
+            <div class="roi-metric"><b data-result="monthly">USD 0</b><span>monthly opportunity</span></div>
+            <div class="roi-metric"><b data-result="additionalBookings">0</b><span>equivalent additional bookings</span></div>
           </div>
-          <a class="btn btn-secondary roi-cta" href="demo.html">Discuss your assumptions</a>
+          <a class="btn btn-secondary roi-cta" href="demo.html">Build a tailored ROI case</a>
         </div>
       </div>
     </div>
@@ -172,12 +184,12 @@
     <div class="container">
       <div class="section-header">
         <div><p class="eyebrow">The Crenex platform</p><h2>Three parts, one leasing process.</h2></div>
-        <p class="lead">Use the operational workflow on its own, add a branded catalogue to generate demand, and layer AI access over the data when it fits your deployment.</p>
+        <p class="lead">Use Leasing Operations on its own, add a branded catalogue to generate demand, and layer AI-assisted insight over the data when it fits your deployment.</p>
       </div>
       <div class="module-grid">
-        <article class="module-card"><span class="module-index">01</span><h3>Workflow</h3><p>Manage requests, bookings, agreements, transactions and reporting across every asset.</p><a href="workflow.html">Explore Workflow →</a></article>
+        <article class="module-card"><span class="module-index">01</span><h3>Leasing Operations</h3><p>Manage requests, bookings, agreements, transactions and reporting across every asset.</p><a href="workflow.html">Explore Leasing Operations →</a></article>
         <article class="module-card"><span class="module-index">02</span><h3>Listing</h3><p>Publish a searchable, branded catalogue of spaces and route enquiries into Crenex.</p><a href="listing.html">Explore Listing →</a></article>
-        <article class="module-card"><span class="module-index">03</span><h3>AI Agent</h3><p>Use natural-language access for operational questions and reporting, configured around your Crenex data.</p><a href="ai-agent.html">Explore AI Agent →</a></article>
+        <article class="module-card"><span class="module-index">03</span><h3>Crenex Assist</h3><p>Ask operational questions, explore reporting and draft routine content with human review.</p><a href="ai-agent.html">Explore Crenex Assist →</a></article>
       </div>
     </div>
   </section>
@@ -204,7 +216,7 @@
   <section class="section dark-flow">
     <div class="container integration-layout">
       <div>
-        <div class="mri-lockup mri-lockup--on-dark"><img src="assets/logos/mri-software.png" alt="MRI Software"/><span>Partner &amp; reseller</span></div>
+        <div class="mri-lockup mri-lockup--on-dark"><img src="assets/logos/mri-software-color.svg" alt="MRI Software"/><span>Partner &amp; reseller</span></div>
         <h2>Connect flexible leasing with MRI PMX.</h2>
         <p class="lead" style="margin-top:24px">Crenex manages the short-term leasing workflow while MRI remains the property and finance backbone. Approved booking and billing data can move through the configured integration.</p>
         <div class="integration-points">
@@ -275,9 +287,9 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div><a class="footer-logo" href="index.html"><img src="assets/brand/crenex-logo-light.svg" alt="Crenex" width="120" height="25"/></a><p>Short-term and specialty leasing software for multi-asset real estate portfolios.</p></div>
-    <div class="footer-col"><h4>Product</h4><a href="platform.html">Platform</a><a href="workflow.html">Workflow</a><a href="listing.html">Listing</a><a href="ai-agent.html">AI Agent</a><a href="roi-calculator.html">ROI calculator</a></div>
+    <div class="footer-col"><h4>Product</h4><a href="platform.html">Platform</a><a href="workflow.html">Leasing Operations</a><a href="listing.html">Listing</a><a href="ai-agent.html">Crenex Assist</a><a href="roi-calculator.html">ROI calculator</a></div>
     <div class="footer-col"><h4>Company</h4><a href="customers.html">Customers</a><a href="industries.html">Use cases</a><a href="trust.html">Security &amp; access</a><a class="footer-partner" href="mri-integration.html">MRI partnership</a></div>
-    <div class="footer-col"><h4>Contact &amp; legal</h4><a href="demo.html">Book a demo</a><a href="mailto:hello@crenex.io">hello@crenex.io</a><a href="https://crenex.io/privacy-policy">Privacy Policy</a><a href="https://crenex.io/terms-and-conditions">Terms &amp; Conditions</a></div>
+    <div class="footer-col"><h4>Contact &amp; legal</h4><a href="demo.html">Book a demo</a><a href="mailto:gaston@crenex.io">gaston@crenex.io</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a></div>
   </div>
   <div class="container footer-bottom"><span>© 2026 Crenex. All rights reserved.</span><span>MRI Software Partner &amp; Reseller</span></div>
 </footer>
