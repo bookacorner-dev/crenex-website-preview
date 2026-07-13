@@ -198,7 +198,7 @@
       ].join('\n');
       const status = demoForm.querySelector('.form-status');
       if(status) status.textContent = 'Opening your email client…';
-      window.location.href = 'mailto:hello@crenex.io?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
+      window.location.href = 'mailto:gaston@crenex.io?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
     });
   }
 })();
