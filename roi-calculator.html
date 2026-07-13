@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Crenex ROI Calculator — Model Your Flexible Leasing Opportunity</title>
+<meta name="description" content="Explore a directional business case for flexible leasing using your portfolio, booking value, revenue and administration assumptions."/>
+<link rel="icon" href="assets/brand/crenex-mark-electric.svg" type="image/svg+xml"/><link rel="stylesheet" href="assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="container header-shell">
+  <a class="brand" href="index.html" aria-label="Crenex home"><span class="brand-mark"><img src="assets/brand/crenex-logo-ink.svg" alt="Crenex" width="126" height="26"/></span></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>Menu</button>
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><div class="nav-links"><a href="platform.html">Platform</a><a href="workflow.html">Workflow</a><a href="listing.html">Listing</a><a href="industries.html">Use cases</a><a href="customers.html">Customers</a><a href="roi-calculator.html">ROI</a><a href="mri-integration.html">MRI</a></div><div class="nav-actions"><a class="btn btn-primary" href="demo.html">Book a demo</a></div></nav>
+</div></header>
+<main id="main">
+  <section class="page-hero roi-page-hero"><div class="container page-hero-inner roi-hero-grid">
+    <div><p class="eyebrow">ROI calculator</p><h1>Model the business case with your own assumptions.</h1><p class="lead">Estimate potential booking-value upside and administration savings from a more connected flexible-leasing workflow.</p><div class="button-row"><a class="btn btn-primary" href="#calculator">Start calculating</a><a class="btn btn-secondary" href="demo.html">Discuss your scenario</a></div></div>
+    <div class="roi-formula-card" aria-label="Calculator model"><p class="eyebrow">How the model works</p><div class="roi-formula-flow"><span>Shopping centres</span><i>×</i><span>Bookings per centre</span><i>×</i><span>Average booking value</span><b>Baseline annual booking value</b><i>×</i><span>Potential revenue lift</span><b>Illustrative annual upside</b></div><p>Move the controls below to reflect your portfolio.</p></div>
+  </div></section>
+
+  <section class="page-section roi-page" id="calculator"><div class="container roi-shell" data-roi>
+    <div class="roi-controls">
+      <p class="eyebrow">Your assumptions</p>
+      <h3>Model an annual scenario.</h3>
+      <div class="range-row"><label for="page-roi-assets">Shopping centres <output for="page-roi-assets" data-output="assets"></output></label><input id="page-roi-assets" aria-describedby="page-roi-note" max="300" min="1" name="assets" type="range" value="80"/></div>
+      <div class="range-row"><label for="page-roi-deals">Bookings per centre / year <output for="page-roi-deals" data-output="deals"></output></label><input id="page-roi-deals" aria-describedby="page-roi-note" max="80" min="1" name="deals" type="range" value="12"/></div>
+      <div class="range-row"><label for="page-roi-avg">Average booking value <output for="page-roi-avg" data-output="avgDeal"></output></label><input id="page-roi-avg" aria-describedby="page-roi-note" max="80000" min="1000" name="avgDeal" step="1000" type="range" value="10000"/></div>
+      <div class="range-row"><label for="page-roi-lift">Potential revenue lift <output for="page-roi-lift" data-output="lift"></output></label><input id="page-roi-lift" aria-describedby="page-roi-note" max="25" min="1" name="lift" type="range" value="5"/></div>
+      <div class="range-row"><label for="page-roi-hours">Admin hours saved / booking <output for="page-roi-hours" data-output="hours"></output></label><input id="page-roi-hours" aria-describedby="page-roi-note" max="12" min="0" name="hours" step="0.5" type="range" value="2"/></div>
+      <div class="range-row"><label for="page-roi-cost">Illustrative annual investment <output for="page-roi-cost" data-output="annualCost"></output></label><input id="page-roi-cost" aria-describedby="page-roi-note" max="500000" min="25000" name="annualCost" step="5000" type="range" value="120000"/></div>
+      <p class="note" id="page-roi-note">Illustrative scenario, not a forecast or traditional ROI or payback calculation. Revenue upside is gross booking value; implementation time, ramp, margin and the financial value of hours saved are excluded.</p>
+    </div>
+    <div class="roi-output">
+      <p class="eyebrow">Illustrative annual revenue upside</p>
+      <h2 data-result="revenue" role="status" aria-live="polite" aria-atomic="true">USD 0</h2>
+      <p>Potential additional booking value from improving capture, conversion and bookable inventory visibility.</p>
+      <div class="roi-metrics">
+        <div class="roi-metric"><b data-result="baseline">USD 0</b><span>baseline booking value</span></div>
+        <div class="roi-metric"><b data-result="hours">0</b><span>admin hours saved</span></div>
+        <div class="roi-metric"><b data-result="multiple">0×</b><span>upside / investment</span></div>
+        <div class="roi-metric"><b data-result="payback">—</b><span>gross-value crossover</span></div>
+      </div>
+      <a class="btn btn-secondary roi-cta" href="demo.html">Discuss your assumptions</a>
+    </div>
+  </section>
+
+  <section class="section tour"><div class="container">
+    <div class="section-header"><div><p class="eyebrow">Read the result carefully</p><h2>A starting point for a commercial conversation.</h2></div><p class="lead">The calculator makes the assumptions visible so teams can challenge them before using the output.</p></div>
+    <div class="feature-cards">
+      <article class="feature-card"><h3>Included</h3><p>Portfolio volume, annual booking frequency, average booking value, potential revenue lift and time saved.</p></article>
+      <article class="feature-card"><h3>Not included</h3><p>Implementation ramp, gross margin, internal change costs, taxes, financing or customer-specific commercial terms.</p></article>
+      <article class="feature-card"><h3>Best next step</h3><p>Validate the ranges with a real asset, current booking data and the teams responsible for leasing and finance.</p></article>
+    </div>
+  </div></section>
+</main>
+<section class="footer-cta section-tight"><div class="container"><div><p class="eyebrow">Turn the model into a real case</p><h2>Bring one portfolio and twelve months of booking data.</h2><p>We’ll help you test the assumptions against your current flexible-leasing operation.</p></div><div class="button-row"><a class="btn btn-ghost" href="platform.html">Explore platform</a><a class="btn btn-secondary" href="demo.html">Book a demo</a></div></div></section>
+<footer class="site-footer"><div class="container footer-grid">
+  <div><a class="footer-logo" href="index.html"><img src="assets/brand/crenex-logo-light.svg" alt="Crenex" width="120" height="25"/></a><p>Short-term and specialty leasing software for multi-asset real estate portfolios.</p></div>
+  <div class="footer-col"><h4>Product</h4><a href="platform.html">Platform</a><a href="workflow.html">Workflow</a><a href="listing.html">Listing</a><a href="ai-agent.html">AI Agent</a><a href="roi-calculator.html">ROI calculator</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="customers.html">Customers</a><a href="industries.html">Use cases</a><a href="trust.html">Security &amp; access</a><a class="footer-partner" href="mri-integration.html">MRI partnership</a></div>
+  <div class="footer-col"><h4>Contact &amp; legal</h4><a href="demo.html">Book a demo</a><a href="mailto:hello@crenex.io">hello@crenex.io</a><a href="https://crenex.io/privacy-policy">Privacy Policy</a><a href="https://crenex.io/terms-and-conditions">Terms &amp; Conditions</a></div>
+</div><div class="container footer-bottom"><span>© 2026 Crenex. All rights reserved.</span><span>MRI Software Partner &amp; Reseller</span></div></footer>
+<script src="assets/js/app.js"></script>
+</body></html>
