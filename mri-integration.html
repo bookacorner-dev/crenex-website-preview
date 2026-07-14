@@ -11,16 +11,16 @@
 <link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin/><link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="icon" href="assets/brand/crenex-mark-electric.svg" type="image/svg+xml"/><link rel="stylesheet" href="assets/css/styles.css"/>
 </head>
-<body>
+<body class="mri-page">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="container header-shell">
-  <a class="brand" href="index.html" aria-label="Crenex home"><span class="brand-mark"><img src="assets/brand/crenex-logo-ink.svg" alt="Crenex" width="126" height="26"/></span></a>
+  <a class="brand" href="./" aria-label="Crenex home"><span class="brand-mark"><img src="assets/brand/crenex-logo-ink.svg" alt="Crenex" width="126" height="26"/></span></a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>Menu</button>
-  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><div class="nav-links"><a href="platform.html">Platform</a><a href="workflow.html">Operations</a><a href="listing.html">Listing</a><a href="industries.html">Use cases</a><a href="customers.html">Customers</a><a href="mri-integration.html">MRI</a></div><div class="nav-actions"><a class="btn btn-primary" href="demo.html">Book a demo</a></div></nav>
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><div class="nav-links"><a href="platform.html">Platform</a><a href="workflow.html">Operations</a><a href="listing.html">Listing</a><a href="ai-agent.html">AI</a><a href="industries.html">Use cases</a><a href="customers.html">Customers</a><a href="blog.html">Blog</a><a href="mri-integration.html">MRI</a></div><div class="nav-actions"><a class="btn btn-primary" href="demo.html">Book a demo</a></div></nav>
 </div></header>
 <main id="main">
   <section class="page-hero"><div class="container page-hero-inner real-page-hero">
-    <div><div class="mri-lockup mri-lockup--on-light"><img src="assets/logos/mri-software-color.svg" alt="MRI Software"/><span>Partner &amp; reseller</span></div><h1>Connect short-term leasing with MRI PMX.</h1><p class="lead">Crenex manages the request-to-booking workflow. MRI remains the property and finance backbone. The configured integration connects the structured data required between them.</p><div class="button-row"><a class="btn btn-primary" href="demo.html">Discuss your MRI setup</a><a class="btn btn-secondary" href="workflow.html">Explore workflow</a></div></div>
+    <div><div class="mri-lockup mri-lockup--on-light"><img src="assets/logos/mri-software-color.svg" alt="MRI Software" width="1367" height="610"/><span>Partner &amp; reseller</span></div><h1>Connect short-term leasing with MRI PMX.</h1><p class="lead">Crenex manages the request-to-booking workflow. MRI remains the property and finance backbone. The configured integration connects the structured data required between them.</p><div class="button-row"><a class="btn btn-primary" href="demo.html">Discuss your MRI setup</a><a class="btn btn-secondary" href="workflow.html">Explore workflow</a></div></div>
     <figure class="exact-screen exact-screen--hero" aria-label="Billing and MRI workspace preview"><span class="exact-screen-badge">Crenex OS</span><div class="exact-screen-viewport exact-screen-viewport--shot"><img class="exact-tour-image" src="assets/screens/billing.png" alt="Crenex OS billing view with MRI mapping" width="1366" height="840" decoding="async" fetchpriority="high"/></div><figcaption><strong>Billing</strong><span>Finance queues, mapped fields and MRI status</span></figcaption></figure>
   </div></section>
 
@@ -40,12 +40,30 @@
   <section class="section dark-flow"><div class="container">
     <div class="section-header"><div><p class="eyebrow">Connected flow</p><h2>From approved booking to mapped data.</h2></div><p class="lead">The exact direction, fields and validation rules are agreed for the customer’s MRI environment.</p></div>
     <div class="flow-list">
-      <div class="flow-step"><h3>Map</h3><p>Confirm assets, identifiers, categories and required fields.</p></div>
-      <div class="flow-step"><h3>Book</h3><p>Run the short-term leasing process in Crenex.</p></div>
-      <div class="flow-step"><h3>Validate</h3><p>Check the commercial and finance data required for handoff.</p></div>
-      <div class="flow-step"><h3>Connect</h3><p>Send or synchronise the agreed fields through the integration.</p></div>
-      <div class="flow-step"><h3>Process</h3><p>Continue the property or finance workflow in MRI PMX.</p></div>
-      <div class="flow-step"><h3>Review</h3><p>Retain traceable context for operational follow-up.</p></div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="11" cy="18" r="2"/></svg></span><span class="flow-index"></span></div>
+        <h3>Map</h3><p>Confirm assets, identifiers, categories and required fields.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="flow-index"></span></div>
+        <h3>Book</h3><p>Run the short-term leasing process in Crenex.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></span><span class="flow-index"></span></div>
+        <h3>Validate</h3><p>Check the commercial and finance data required for handoff.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="M8 7H5a3 3 0 0 0 0 6h3M16 7h3a3 3 0 0 1 0 6h-3M8 10h8"/></svg></span><span class="flow-index"></span></div>
+        <h3>Connect</h3><p>Send or synchronise the agreed fields through the integration.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="m8 11 2 2 5-5M16 15h2"/></svg></span><span class="flow-index"></span></div>
+        <h3>Process</h3><p>Continue the property or finance workflow in MRI PMX.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-marker" aria-hidden="true"><span class="flow-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4M8.5 11l1.8 1.8 3.5-4"/></svg></span><span class="flow-index"></span></div>
+        <h3>Review</h3><p>Retain traceable context for operational follow-up.</p>
+      </div>
     </div>
   </div></section>
 
@@ -66,10 +84,10 @@
 </main>
 <section class="footer-cta section-tight"><div class="container"><div><p class="eyebrow">Bring your MRI setup</p><h2>Map one booking from Crenex to MRI.</h2><p>We’ll work through the systems, identifiers and finance fields your process actually requires.</p></div><div class="button-row"><a class="btn btn-ghost" href="platform.html">Explore platform</a><a class="btn btn-secondary" href="demo.html">Book a demo</a></div></div></section>
 <footer class="site-footer"><div class="container footer-grid">
-  <div><a class="footer-logo" href="index.html"><img src="assets/brand/crenex-logo-light.svg" alt="Crenex" width="120" height="25"/></a><p>Short-term and specialty leasing software for multi-asset real estate portfolios.</p></div>
+  <div><a class="footer-logo" href="./"><img src="assets/brand/crenex-logo-light.svg" alt="Crenex" width="120" height="25"/></a><p>Short-term and specialty leasing software for multi-asset real estate portfolios.</p></div>
   <div class="footer-col"><h4>Product</h4><a href="platform.html">Platform</a><a href="workflow.html">Leasing Operations</a><a href="listing.html">Listing</a><a href="ai-agent.html">Crenex Assist</a><a href="roi-calculator.html">ROI calculator</a></div>
-  <div class="footer-col"><h4>Company</h4><a href="customers.html">Customers</a><a href="industries.html">Use cases</a><a href="trust.html">Security &amp; access</a><a class="footer-partner" href="mri-integration.html">MRI partnership</a></div>
-  <div class="footer-col"><h4>Contact &amp; legal</h4><a href="demo.html">Book a demo</a><a href="mailto:gaston@crenex.io">gaston@crenex.io</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a></div>
+  <div class="footer-col"><h4>Company</h4><a href="customers.html">Customers</a><a href="industries.html">Use cases</a><a href="blog.html">Blog</a><a href="trust.html">Security &amp; access</a><a class="footer-partner" href="mri-integration.html">MRI partnership</a></div>
+  <div class="footer-col"><h4>Contact &amp; legal</h4><a href="demo.html">Book a demo</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a></div>
 </div><div class="container footer-bottom"><span>© 2026 Crenex. All rights reserved.</span><span>MRI Software Partner &amp; Reseller</span></div></footer>
 <script src="assets/js/app.js"></script>
 </body></html>

@@ -2,7 +2,7 @@
   const body = document.body;
   const toggle = document.querySelector('[data-nav-toggle]');
   const nav = document.querySelector('#site-nav');
-  const mobile = window.matchMedia('(max-width: 860px)');
+  const mobile = window.matchMedia('(max-width: 1040px)');
 
   function setNav(open){
     if(!toggle || !nav) return;
@@ -178,6 +178,30 @@
     inputs.forEach(input => input.addEventListener('input', renderRoi));
     scenarios.forEach(input => input.addEventListener('change', renderRoi));
     renderRoi();
+  });
+
+  document.querySelectorAll('[data-blog-filters]').forEach(filters => {
+    const buttons = Array.from(filters.querySelectorAll('[data-blog-filter]'));
+    const grid = document.querySelector('[data-blog-grid]');
+    const cards = grid ? Array.from(grid.querySelectorAll('[data-blog-card]')) : [];
+    if(!buttons.length || !cards.length) return;
+
+    function selectCategory(category, updateUrl){
+      const selected = buttons.some(button => button.dataset.blogFilter === category) ? category : 'all';
+      buttons.forEach(button => button.setAttribute('aria-pressed', button.dataset.blogFilter === selected ? 'true' : 'false'));
+      cards.forEach(card => {
+        card.hidden = selected !== 'all' && card.dataset.category !== selected;
+      });
+      if(updateUrl && window.history && window.history.replaceState){
+        const url = new URL(window.location.href);
+        if(selected === 'all') url.searchParams.delete('category');
+        else url.searchParams.set('category', selected);
+        window.history.replaceState({},'',url.pathname + url.search + url.hash);
+      }
+    }
+
+    buttons.forEach(button => button.addEventListener('click', () => selectCategory(button.dataset.blogFilter, true)));
+    selectCategory(new URLSearchParams(window.location.search).get('category') || 'all', false);
   });
 
   const demoForm = document.querySelector('[data-demo-form]');
