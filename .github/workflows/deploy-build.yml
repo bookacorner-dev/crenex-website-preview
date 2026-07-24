@@ -1,0 +1,46 @@
+name: Publish to build (Hostinger deploy)
+
+# En cada push/merge a main, espeja el sitio desplegable a la branch `build`.
+# `build` es lo que Hostinger clona/pulea a public_html (auto-deploy por webhook).
+# Sin build step: el repo ya es HTML estático final; solo se strippean archivos
+# que no deben quedar públicos (docs/, .github/, README).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-build
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Armar bundle desplegable (strip archivos repo-only)
+        run: |
+          mkdir -p _bundle
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'docs' \
+            --exclude 'README.md' \
+            --exclude '_bundle' \
+            ./ _bundle/
+          echo "Archivos en el bundle:"; find _bundle -maxdepth 1 | sort
+
+      - name: Publicar bundle a la branch build
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: build
+          FOLDER: _bundle
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Deploy build: ({sha}) {msg}"
