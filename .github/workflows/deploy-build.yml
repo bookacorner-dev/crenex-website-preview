@@ -1,9 +1,12 @@
-name: Publish to build (Hostinger deploy)
-
-# En cada push/merge a main, espeja el sitio desplegable a la branch `build`.
-# `build` es lo que Hostinger clona/pulea a public_html (auto-deploy por webhook).
-# Sin build step: el repo ya es HTML estático final; solo se strippean archivos
-# que no deben quedar públicos (docs/, .github/, README).
+# ─────────────────────────────────────────────────────────────────────────────
+# [CD] Publica el sitio estático a producción (crenex.io / Hostinger).
+#   push/merge a main → espeja el sitio a la branch `build` (strippeando docs/,
+#   .github/, .claude/, README) → Hostinger (Git deploy conectado a `build`)
+#   publica a public_html por webhook.
+# Sin build step: el repo ya es HTML/CSS/JS final. Runbook: docs/deploy-runbook.md
+# ─────────────────────────────────────────────────────────────────────────────
+name: "[CD] 🚀 Deploy · publish to build (Hostinger)"
+run-name: "Deploy build · ${{ github.sha }} · @${{ github.actor }}"
 
 on:
   push:
@@ -17,31 +20,37 @@ concurrency:
   group: deploy-build
   cancel-in-progress: true
 
+env:
+  DEPLOY_BRANCH: build
+  BUNDLE_DIR: _bundle
+
 jobs:
+  # ───────────────────────────────────────────────────────────────────────────
+  # Arma el bundle publicable (strip repo-only) y lo espeja a la branch `build`.
+  # ───────────────────────────────────────────────────────────────────────────
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Armar bundle desplegable (strip archivos repo-only)
         run: |
-          mkdir -p _bundle
+          mkdir -p "$BUNDLE_DIR"
           rsync -a \
             --exclude '.git' \
             --exclude '.github' \
             --exclude '.claude' \
             --exclude 'docs' \
             --exclude 'README.md' \
-            --exclude '_bundle' \
-            ./ _bundle/
-          echo "Archivos en el bundle:"; find _bundle -maxdepth 1 | sort
+            --exclude "$BUNDLE_DIR" \
+            ./ "$BUNDLE_DIR"/
+          echo "Contenido del bundle:"; find "$BUNDLE_DIR" -maxdepth 1 | sort
 
-      - name: Publicar bundle a la branch build
+      - name: Publicar bundle → branch ${{ env.DEPLOY_BRANCH }}
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: build
-          FOLDER: _bundle
+          BRANCH: ${{ env.DEPLOY_BRANCH }}
+          FOLDER: ${{ env.BUNDLE_DIR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Deploy build: ({sha}) {msg}"
