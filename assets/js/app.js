@@ -65,49 +65,6 @@
 
   document.querySelectorAll('.exact-screen-viewport iframe').forEach(freezeExactFrame);
 
-  const genericProductScreen = /(?:^|\/)(?:dashboard|bookings|messages|occupancy|billing|performance)\.png(?:[?#].*)?$/i;
-  const genericPortfolioPatch = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAAASCAIAAAAMvs1NAAAC9ElEQVR42mP8//8/wyigHmAaDYLRAB0NUBLBnz9/h3yAvnv3nk9EEY7UdSySUvOePH1Ooen///+vqGmWVzWUUtDZu+8QLmWPHz/lE1FUVDdiYGB4//6Duo65u0/oMEmhjvbWNlbm33/8WLN+s6df+Pfv30k1MTE118bB+9KVawwMDBs2bZ82Y97v378tLUzV1VWJ0c7KyiooKCAqIjJEA5QFjb9x7RIGBoYPHz5qGVg/fPh4y7ZdocH+JJl4+/a9S1euffv6jYGB4eq16wwMDAlxkW1N1URq5+HhPnN8z3ArQwUE+C0tTBkYGO4/eMzAwPDj58/6pk5DM0dpRV13n9CDh48hZ1UTS5cly1araZtPnzlfx8gWkjbdvEMl5LS7eqcwMDBMmTaHT0Tx8eOneIzCmv2JUT80AvTr128nT51lYGBQkJdhYGBITsvvnzTj958/1pZmZ85e8AuKOXz0BFzxy1evi8vqWFiYubi4osKDhIUFGRgY/Hw8HOys9PV0GBgYDA1001LieHi4CRqFCUhVP/Dg////////f/v2Ha+wAq+wQmxiZkRMqpq2Oa+wgrahzdevXy9evsorrCAiqfbhw8f////3TZzOK6zg4RP2////R4+eQHQtXb7mPwxY23vxCiscP3H6////9U2dvMIKzW09EClcRkHMUVAzhJsJYeOxetAC9BS6YdP2rdt3MzAwBAf6bN+4gouL68qV6wwMDMZG+vz8fAwMDC7O9gwMDJB8DQHc3FzhoQHERB5BoyhUPxgrpU9v7mMmYQYGBkZGRkxBCODgYGdmZiYyN+A3ikL1Q6Nhr6OjycDAcObshU+fPjMwMECak7o6mvh1/fr9m3KjyLN6cKVQTKCvq+3t6bp1+25bJ18dbY0du/YyMjJWlRfiUi8rK33pyrWK6qaYyFAKjSJV/ZDpes6bPSkvO5WRkWH/wSOGBnob1iy2t7XCpbiuusTQQPfOnfv7Dhyh0Cgy1A84YBwdvhsdbRoN0JEEAEYAQiBsLKCxAAAAAElFTkSuQmCC';
-
-  function syncGenericPortfolioLabel(image){
-    if(!image) return;
-    const viewport = image.closest('.exact-screen-viewport--shot');
-    if(!viewport) return;
-    const source = image.getAttribute('src') || '';
-    let patch = viewport.querySelector('[data-generic-portfolio-label]');
-
-    if(!genericProductScreen.test(source)){
-      if(patch) patch.remove();
-      return;
-    }
-
-    if(patch) return;
-    patch = document.createElement('span');
-    patch.setAttribute('data-generic-portfolio-label','');
-    patch.setAttribute('aria-hidden','true');
-    Object.assign(patch.style,{
-      position:'absolute',
-      left:'31.6984%',
-      top:'2.1429%',
-      width:'8.1991%',
-      height:'2.1429%',
-      zIndex:'4',
-      pointerEvents:'none',
-      backgroundImage:'url("' + genericPortfolioPatch + '")',
-      backgroundPosition:'center',
-      backgroundRepeat:'no-repeat',
-      backgroundSize:'100% 100%'
-    });
-    viewport.appendChild(patch);
-  }
-
-  document.querySelectorAll('.exact-screen-viewport--shot img').forEach(image => {
-    syncGenericPortfolioLabel(image);
-    if('MutationObserver' in window){
-      const observer = new MutationObserver(() => syncGenericPortfolioLabel(image));
-      observer.observe(image,{attributes:true,attributeFilter:['src']});
-    }
-  });
-
   document.querySelectorAll('[data-exact-tour]').forEach(tour => {
     const tabs = Array.from(tour.querySelectorAll('[data-exact-tab]'));
     const frame = tour.querySelector('[data-exact-frame]');
