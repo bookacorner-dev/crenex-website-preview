@@ -44,24 +44,6 @@ jobs:
             --exclude 'README.md' \
             --exclude "$BUNDLE_DIR" \
             ./ "$BUNDLE_DIR"/
-
-          # Los assets se cachean durante meses en producción. Versionar sus URLs
-          # en cada deploy evita que el navegador siga mostrando CSS, JS o capturas antiguas.
-          ASSET_VERSION="${GITHUB_SHA::12}"
-          while IFS= read -r -d '' html_file; do
-            sed -i \
-              -e "s|assets/css/styles.css|assets/css/styles.css?v=${ASSET_VERSION}|g" \
-              -e "s|assets/js/app.js|assets/js/app.js?v=${ASSET_VERSION}|g" \
-              "$html_file"
-
-            for screen in dashboard bookings messages occupancy billing performance listing; do
-              sed -i \
-                "s|assets/screens/${screen}.png|assets/screens/${screen}.png?v=${ASSET_VERSION}|g" \
-                "$html_file"
-            done
-          done < <(find "$BUNDLE_DIR" -type f -name '*.html' -print0)
-
-          echo "Versión de assets: $ASSET_VERSION"
           echo "Contenido del bundle:"; find "$BUNDLE_DIR" -maxdepth 1 | sort
 
       - name: Publicar bundle → branch ${{ env.DEPLOY_BRANCH }}
