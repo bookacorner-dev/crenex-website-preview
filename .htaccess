@@ -18,7 +18,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
   # CSP: el sitio usa estilos inline -> 'unsafe-inline' acotado a style-src.
   # script-src queda en 'self'. form-action habilita el POST del demo a FormSubmit.
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'"
 </IfModule>
 
 # --- Cache de assets estáticos ---
