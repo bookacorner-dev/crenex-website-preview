@@ -22,25 +22,24 @@
   .mri-award-spotlight:before{
     content:"";
     position:absolute;
-    width:420px;
-    height:420px;
-    right:-120px;
+    width:680px;
+    height:680px;
+    right:-150px;
     top:-210px;
     border-radius:50%;
-    background:radial-gradient(circle,rgba(49,95,189,.12),rgba(49,95,189,0) 68%);
+    background:radial-gradient(circle,rgba(131,220,246,.18) 0%,rgba(49,95,189,.07) 42%,rgba(49,95,189,0) 70%);
     pointer-events:none;
   }
   .mri-award-shell{
     position:relative;
+    z-index:1;
     display:grid;
-    grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);
+    grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
     gap:56px;
     align-items:center;
     padding:58px 0 62px;
   }
-  .mri-award-copy .eyebrow{
-    margin-bottom:18px;
-  }
+  .mri-award-copy .eyebrow{margin-bottom:18px;}
   .mri-award-copy h2{
     max-width:760px;
     font-size:clamp(36px,4.3vw,58px);
@@ -59,119 +58,64 @@
   }
   .mri-award-object{
     position:relative;
-    min-height:250px;
+    min-height:360px;
     display:grid;
     place-items:center;
+    isolation:isolate;
   }
-  .mri-award-card{
-    position:relative;
-    width:min(100%,390px);
-    min-height:230px;
-    padding:28px 30px;
-    border-radius:30px;
-    background:#071126;
-    color:#fff;
-    box-shadow:0 24px 60px rgba(7,17,38,.18);
-    overflow:hidden;
-  }
-  .mri-award-card:after{
+  .mri-award-object:before{
     content:"";
     position:absolute;
-    width:210px;
-    height:210px;
-    right:-65px;
-    bottom:-95px;
+    width:300px;
+    height:300px;
     border-radius:50%;
-    background:radial-gradient(circle,rgba(46,230,166,.30),rgba(46,230,166,0) 68%);
+    background:radial-gradient(circle,rgba(255,255,255,.92) 0%,rgba(255,255,255,.58) 46%,rgba(255,255,255,0) 72%);
+    z-index:-2;
   }
-  .mri-award-card-top{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-  }
-  .mri-award-card-top img{
-    width:108px;
-    height:auto;
-    filter:brightness(0) invert(1);
-    opacity:.92;
-  }
-  .mri-award-year{
-    font-family:"Geist Mono",monospace;
-    font-size:12px;
-    letter-spacing:.10em;
-    color:#9ba7bb;
-  }
-  .mri-award-medal{
-    position:relative;
-    z-index:2;
-    width:72px;
-    height:72px;
-    margin-top:24px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    border:1px solid rgba(234,223,205,.34);
-    background:linear-gradient(145deg,rgba(234,223,205,.18),rgba(234,223,205,.05));
-  }
-  .mri-award-medal svg{
-    width:34px;
-    height:34px;
-    fill:none;
-    stroke:#eadfcd;
-    stroke-width:1.7;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-  }
-  .mri-award-card strong{
-    position:relative;
-    z-index:2;
-    display:block;
-    margin-top:20px;
-    max-width:260px;
-    font-size:24px;
-    line-height:1.06;
-    letter-spacing:-.035em;
-  }
-  .mri-award-card small{
-    position:relative;
-    z-index:2;
-    display:block;
-    margin-top:10px;
-    color:#9ba7bb;
-    font-family:"Geist Mono",monospace;
-    font-size:10px;
-    letter-spacing:.09em;
-    text-transform:uppercase;
-  }
-  .mri-award-ribbon{
+  .mri-award-object:after{
+    content:"";
     position:absolute;
-    right:-14px;
-    top:42px;
-    z-index:3;
-    transform:rotate(7deg);
-    padding:10px 16px;
+    width:250px;
+    height:34px;
+    bottom:26px;
+    border-radius:50%;
+    background:rgba(7,17,38,.14);
+    filter:blur(18px);
+    z-index:-1;
+  }
+  .mri-award-trophy{
+    display:block;
+    width:min(100%,470px);
+    height:auto;
+    filter:drop-shadow(0 24px 34px rgba(7,17,38,.17));
+    transform:rotate(1.5deg);
+  }
+  .mri-award-micro{
+    position:absolute;
+    right:0;
+    top:26px;
+    padding:9px 12px;
     border-radius:999px;
-    background:#fff;
-    color:#071126;
-    border:1px solid #d9e2ee;
-    box-shadow:0 12px 28px rgba(7,17,38,.12);
+    background:rgba(255,255,255,.84);
+    border:1px solid rgba(13,19,32,.08);
+    box-shadow:0 12px 30px rgba(7,17,38,.08);
+    color:#566176;
     font-family:"Geist Mono",monospace;
     font-size:10px;
-    font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
+    backdrop-filter:blur(10px);
   }
   @media(max-width:860px){
-    .mri-award-shell{grid-template-columns:1fr;gap:34px;padding:46px 0 50px}
-    .mri-award-object{justify-items:start;min-height:0}
-    .mri-award-ribbon{right:auto;left:310px}
+    .mri-award-shell{grid-template-columns:1fr;gap:30px;padding:46px 0 50px}
+    .mri-award-object{min-height:320px}
+    .mri-award-trophy{width:min(82vw,430px)}
+    .mri-award-micro{right:8%;top:14px}
   }
   @media(max-width:520px){
-    .mri-award-ribbon{display:none}
-    .mri-award-card{width:100%}
+    .mri-award-object{min-height:280px}
+    .mri-award-trophy{width:min(92vw,360px)}
+    .mri-award-micro{display:none}
   }
 </style>`;
 
@@ -180,26 +124,13 @@
   <div class="container mri-award-shell">
     <div class="mri-award-copy">
       <p class="eyebrow">Recognition</p>
-      <h2>Named MRI APAC Partner of the Year.</h2>
+      <h2>Named MRI Partner of the Year.</h2>
       <p class="lead">In 2026, MRI Software recognised Crenex as its APAC Partner of the Year — reflecting the strength of our partnership and the work being delivered across casual leasing operations in the region.</p>
       <a class="text-link" href="mri-integration.html">Explore our MRI partnership →</a>
     </div>
-    <div class="mri-award-object" aria-hidden="true">
-      <div class="mri-award-ribbon">APAC · 2026</div>
-      <div class="mri-award-card">
-        <div class="mri-award-card-top">
-          <img src="assets/logos/mri-software.png" alt="" width="500" height="287"/>
-          <span class="mri-award-year">2026</span>
-        </div>
-        <div class="mri-award-medal">
-          <svg viewBox="0 0 32 32">
-            <path d="M10 4h12v5c0 5-2.5 8.5-6 8.5S10 14 10 9V4Z"/>
-            <path d="M10 8H6v1.5c0 3.2 2.1 5.5 5.2 6.2M22 8h4v1.5c0 3.2-2.1 5.5-5.2 6.2M16 17.5V23M11.5 27h9M13 23h6v4h-6z"/>
-          </svg>
-        </div>
-        <strong>APAC Partner<br/>of the Year</strong>
-        <small>Recognised by MRI Software</small>
-      </div>
+    <div class="mri-award-object">
+      <span class="mri-award-micro">MRI Re:Visionary Awards · 2026</span>
+      <img class="mri-award-trophy" src="assets/recognition/mri-partner-of-the-year-2026.webp" alt="MRI Re:Visionary Partner of the Year award presented to Crenex in 2026"/>
     </div>
   </div>
 </section>`;
