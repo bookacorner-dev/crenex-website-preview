@@ -1,0 +1,1 @@
+Hostinger deploy trigger for commit 1552587739cf1ae832bbcb4b07880f912b8c1e6a
