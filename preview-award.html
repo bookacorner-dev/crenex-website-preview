@@ -1,150 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Crenex award preview</title>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Crenex award preview</title></head>
 <body>
 <script>
-(async () => {
-  const response = await fetch('./index.html', { cache: 'no-store' });
-  let html = await response.text();
-
-  const styles = `
-<style>
-  .mri-award-spotlight{
-    position:relative;
-    overflow:hidden;
-    background:#f4efe6;
-    border-bottom:1px solid rgba(13,19,32,.10);
-  }
-  .mri-award-spotlight:before{
-    content:"";
-    position:absolute;
-    width:680px;
-    height:680px;
-    right:-150px;
-    top:-210px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(131,220,246,.18) 0%,rgba(49,95,189,.07) 42%,rgba(49,95,189,0) 70%);
-    pointer-events:none;
-  }
-  .mri-award-shell{
-    position:relative;
-    z-index:1;
-    display:grid;
-    grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
-    gap:56px;
-    align-items:center;
-    padding:58px 0 62px;
-  }
-  .mri-award-copy .eyebrow{margin-bottom:18px;}
-  .mri-award-copy h2{
-    max-width:760px;
-    font-size:clamp(36px,4.3vw,58px);
-  }
-  .mri-award-copy .lead{
-    margin-top:20px;
-    max-width:650px;
-    font-size:18px;
-  }
-  .mri-award-copy .text-link{
-    display:inline-block;
-    margin-top:22px;
-    color:#315fbd;
-    font-size:14px;
-    font-weight:820;
-  }
-  .mri-award-object{
-    position:relative;
-    min-height:360px;
-    display:grid;
-    place-items:center;
-    isolation:isolate;
-  }
-  .mri-award-object:before{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(255,255,255,.92) 0%,rgba(255,255,255,.58) 46%,rgba(255,255,255,0) 72%);
-    z-index:-2;
-  }
-  .mri-award-object:after{
-    content:"";
-    position:absolute;
-    width:250px;
-    height:34px;
-    bottom:26px;
-    border-radius:50%;
-    background:rgba(7,17,38,.14);
-    filter:blur(18px);
-    z-index:-1;
-  }
-  .mri-award-trophy{
-    position:relative;
-    z-index:2;
-    display:block;
-    width:min(100%,470px);
-    height:auto;
-    filter:drop-shadow(0 24px 34px rgba(7,17,38,.17));
-    transform:rotate(1.5deg);
-  }
-  .mri-award-micro{
-    position:absolute;
-    right:0;
-    top:26px;
-    z-index:3;
-    padding:9px 12px;
-    border-radius:999px;
-    background:rgba(255,255,255,.84);
-    border:1px solid rgba(13,19,32,.08);
-    box-shadow:0 12px 30px rgba(7,17,38,.08);
-    color:#566176;
-    font-family:"Geist Mono",monospace;
-    font-size:10px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    backdrop-filter:blur(10px);
-  }
-  @media(max-width:860px){
-    .mri-award-shell{grid-template-columns:1fr;gap:30px;padding:46px 0 50px}
-    .mri-award-object{min-height:320px}
-    .mri-award-trophy{width:min(82vw,430px)}
-    .mri-award-micro{right:8%;top:14px}
-  }
-  @media(max-width:520px){
-    .mri-award-object{min-height:280px}
-    .mri-award-trophy{width:min(92vw,360px)}
-    .mri-award-micro{display:none}
-  }
-</style>`;
-
-  const award = `
-<section class="mri-award-spotlight" aria-label="MRI APAC Partner of the Year 2026">
-  <div class="container mri-award-shell">
-    <div class="mri-award-copy">
-      <p class="eyebrow">Recognition</p>
-      <h2>Named MRI Partner of the Year.</h2>
-      <p class="lead">In 2026, MRI Software recognised Crenex as its APAC Partner of the Year — reflecting the strength of our partnership and the work being delivered across casual leasing operations in the region.</p>
-      <a class="text-link" href="mri-integration.html">Explore our MRI partnership →</a>
-    </div>
-    <div class="mri-award-object">
-      <span class="mri-award-micro">MRI Re:Visionary Awards · 2026</span>
-      <img class="mri-award-trophy" src="./assets/recognition/mri-partner-of-the-year-2026.webp" alt="MRI Re:Visionary Partner of the Year award presented to Crenex in 2026"/>
-    </div>
-  </div>
-</section>`;
-
-  html = html.replace('</head>', styles + '\n</head>');
-  html = html.replace('<section class="section narrative">', award + '\n\n  <section class="section narrative">');
-
-  document.open();
-  document.write(html);
-  document.close();
+(async()=>{
+  const response=await fetch('./index.html',{cache:'no-store'});
+  let html=await response.text();
+  const styles=`<style>
+  .mri-award-spotlight{position:relative;overflow:hidden;background:#f4efe6;border-bottom:1px solid rgba(13,19,32,.10)}
+  .mri-award-spotlight:before{content:"";position:absolute;width:680px;height:680px;right:-150px;top:-210px;border-radius:50%;background:radial-gradient(circle,rgba(131,220,246,.18) 0%,rgba(49,95,189,.07) 42%,rgba(49,95,189,0) 70%);pointer-events:none}
+  .mri-award-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);gap:56px;align-items:center;padding:58px 0 62px}
+  .mri-award-copy .eyebrow{margin-bottom:18px}.mri-award-copy h2{max-width:760px;font-size:clamp(36px,4.3vw,58px)}
+  .mri-award-copy .lead{margin-top:20px;max-width:650px;font-size:18px}.mri-award-copy .text-link{display:inline-block;margin-top:22px;color:#315fbd;font-size:14px;font-weight:820}
+  .mri-award-object{position:relative;min-height:360px;display:grid;place-items:center}.mri-award-object:after{content:"";position:absolute;width:290px;height:42px;bottom:18px;border-radius:50%;background:rgba(7,17,38,.16);filter:blur(20px);z-index:0}
+  .mri-award-trophy{position:relative;z-index:2;display:block;width:min(100%,470px);height:auto;border-radius:30px;box-shadow:0 28px 75px rgba(7,17,38,.20)}
+  .mri-award-micro{position:absolute;right:0;top:26px;z-index:3;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.88);border:1px solid rgba(13,19,32,.08);box-shadow:0 12px 30px rgba(7,17,38,.08);color:#566176;font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(10px)}
+  @media(max-width:860px){.mri-award-shell{grid-template-columns:1fr;gap:30px;padding:46px 0 50px}.mri-award-object{min-height:320px}.mri-award-trophy{width:min(82vw,430px)}.mri-award-micro{right:8%;top:14px}}
+  @media(max-width:520px){.mri-award-object{min-height:280px}.mri-award-trophy{width:min(92vw,360px)}.mri-award-micro{display:none}}
+  </style>`;
+  const award=`<section class="mri-award-spotlight" aria-label="MRI APAC Partner of the Year 2026"><div class="container mri-award-shell"><div class="mri-award-copy"><p class="eyebrow">Recognition</p><h2>Named MRI Partner of the Year.</h2><p class="lead">In 2026, MRI Software recognised Crenex as its APAC Partner of the Year — reflecting the strength of our partnership and the work being delivered across casual leasing operations in the region.</p><a class="text-link" href="mri-integration.html">Explore our MRI partnership →</a></div><div class="mri-award-object"><span class="mri-award-micro">MRI Re:Visionary Awards · 2026</span><img class="mri-award-trophy" src="data:image/webp;base64,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" alt="MRI Re:Visionary Partner of the Year award presented to Crenex in 2026"/></div></div></section>`;
+  html=html.replace('</head>',styles+'\n</head>');
+  html=html.replace('<section class="section narrative">',award+'\n\n<section class="section narrative">');
+  document.open();document.write(html);document.close();
 })();
 </script>
-</body>
-</html>
+</body></html>
