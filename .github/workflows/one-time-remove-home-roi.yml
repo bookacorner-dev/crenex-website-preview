@@ -1,0 +1,45 @@
+name: One-time remove homepage ROI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-remove-home-roi.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  remove:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Remove ROI calculator section from homepage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          html = p.read_text()
+          start_marker = '  <section class="section roi-feature" id="roi-calculator">'
+          next_marker = '  <section class="section tour" data-exact-tour>'
+          start = html.find(start_marker)
+          if start == -1:
+              raise SystemExit('ROI section not found')
+          end = html.find(next_marker, start)
+          if end == -1:
+              raise SystemExit('Following tour section not found')
+          p.write_text(html[:start] + html[end:])
+          PY
+
+      - name: Commit homepage cleanup
+        run: |
+          rm .github/workflows/one-time-remove-home-roi.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/one-time-remove-home-roi.yml
+          git commit -m 'Remove ROI calculator section from homepage'
+          git push origin HEAD:main
