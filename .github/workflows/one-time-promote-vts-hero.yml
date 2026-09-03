@@ -1,0 +1,29 @@
+name: "One-time: promote VTS homepage hero"
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    if: github.event.head_commit.message == 'chore: prepare VTS hero promotion'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Promote only the approved homepage index
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin preview/vts-style-hero
+          git checkout origin/preview/vts-style-hero -- index.html
+          rm .github/workflows/one-time-promote-vts-hero.yml
+          git add index.html .github/workflows/one-time-promote-vts-hero.yml
+          git commit -m "Promote VTS-style homepage hero"
+          git push origin HEAD:main
