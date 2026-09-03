@@ -33,6 +33,24 @@
 .partner-badge{position:absolute;z-index:3;right:4px;top:26px;padding:11px 16px;border-radius:999px;background:#fff;border:1px solid rgba(13,19,32,.08);box-shadow:0 14px 35px rgba(7,17,38,.09);color:#566176;font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:980px){.mri-award-shell{grid-template-columns:1fr;gap:42px;padding:58px 0 64px}.partner-lockup{min-height:390px}}
 @media(max-width:580px){.partner-card{padding:34px 24px 30px;border-radius:28px}.partner-logos{grid-template-columns:1fr 38px 1fr;gap:10px}.partner-logo--mri img{width:130px}.partner-logo--crenex img{width:138px}.partner-times{width:38px;height:38px;font-size:24px}.partner-orbit{width:410px;height:410px}.partner-lockup:before{width:320px;height:320px}.partner-lockup:after{width:235px;height:235px}.partner-badge{display:none}.mri-award-copy .text-link{font-size:16px}}
+
+/* Preview-only VTS-style homepage hero */
+.vts-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);min-height:745px}
+.vts-hero .hero-grid-bg{mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.58) 65%,transparent 100%)}
+.vts-hero-glow{position:absolute;width:720px;height:720px;border-radius:50%;right:-180px;top:-230px;background:radial-gradient(circle,rgba(255,255,255,.9) 0%,rgba(131,220,246,.15) 42%,rgba(49,95,189,.06) 62%,transparent 73%);pointer-events:none}
+.vts-hero-inner{position:relative;z-index:2;min-height:745px;display:flex;flex-direction:column;justify-content:center;padding:86px 0 98px;max-width:1120px;margin:0 auto}
+.vts-hero-inner>.eyebrow{display:inline-flex;width:max-content;padding:9px 13px;border-radius:10px;background:#dcf6ee;color:#18332e;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:850;margin-bottom:30px}
+.vts-hero-title{margin:0;max-width:1050px;font-size:clamp(62px,7.25vw,104px);line-height:.96;letter-spacing:-.065em;font-weight:835;padding-bottom:.08em}
+.vts-fixed{display:block}
+.vts-type-row{display:flex;align-items:baseline;min-height:1.28em;padding-bottom:.10em;margin-top:10px;white-space:nowrap;overflow:visible}
+.vts-typed{display:inline-block;line-height:1.04;padding-bottom:.08em;background:linear-gradient(90deg,#0aa27d 0%,#0d9eb9 34%,#315fbd 68%,#6752dd 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vts-cursor{display:inline-block;width:.055em;height:.84em;margin-left:.08em;background:#315fbd;transform:translateY(.06em);animation:vtsBlink .9s steps(1) infinite}
+@keyframes vtsBlink{0%,48%{opacity:1}49%,100%{opacity:0}}
+.vts-hero-inner>.lead{margin-top:34px;max-width:780px;color:#4b5870;font-size:clamp(19px,2.1vw,24px);line-height:1.5}
+.vts-hero-inner>.button-row{margin-top:34px}
+.vts-hero-inner>.hero-note{margin-top:38px}
+@media(max-width:900px){.vts-hero,.vts-hero-inner{min-height:680px}.vts-type-row{white-space:normal;min-height:1.45em}.vts-hero-title{font-size:clamp(52px,12vw,78px)}}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://crenex.io/#organization","name":"Crenex","legalName":"Book A Corner Sociedad Limitada","url":"https://crenex.io/","logo":"https://crenex.io/assets/brand/crenex-logo-ink.svg","address":{"@type":"PostalAddress","streetAddress":"Calle del Gobernador, 23","postalCode":"28014","addressLocality":"Madrid","addressCountry":"ES"}},{"@type":"WebSite","@id":"https://crenex.io/#website","url":"https://crenex.io/","name":"Crenex","publisher":{"@id":"https://crenex.io/#organization"},"inLanguage":"en"},{"@type":"SoftwareApplication","name":"Crenex","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Short-term and specialty leasing software for multi-asset real estate portfolios.","publisher":{"@id":"https://crenex.io/#organization"}}]}</script>
 </head>
@@ -59,21 +77,18 @@
 </header>
 
 <main id="main">
-  <section class="hero">
+  <section class="hero vts-hero">
     <div class="hero-grid-bg"></div>
-    <div class="container hero-inner real-hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Short-term &amp; specialty leasing software</p>
-        <h1>From enquiry to invoice, manage flexible leasing <span class="accent">in one place.</span></h1>
-        <p class="lead">Crenex connects spaces, requests, approvals, agreements, billing and reporting across your portfolio—without rebuilding the same deal in emails and spreadsheets.</p>
-        <div class="button-row"><a class="btn btn-primary" href="demo.html">Book a demo</a><a class="btn btn-secondary" href="platform.html">Explore the platform</a></div>
-        <div class="hero-note"><span class="dot"></span><span>Built for shopping centres, retail portfolios and teams managing non-standard occupancy.</span></div>
-      </div>
-      <div class="hero-visual">
-        <figure class="exact-screen exact-screen--hero" role="img" aria-label="Crenex OS dashboard preview">
-          <div class="exact-screen-viewport exact-screen-viewport--shot"><img class="exact-tour-image" src="assets/screens/dashboard.png" alt="Crenex OS dashboard preview" width="1366" height="840" decoding="async" fetchpriority="high"/></div>
-        </figure>
-      </div>
+    <div class="vts-hero-glow" aria-hidden="true"></div>
+    <div class="container vts-hero-inner">
+      <p class="eyebrow">Short-term &amp; specialty leasing software</p>
+      <h1 class="vts-hero-title">
+        <span class="vts-fixed">The platform built for</span>
+        <span class="vts-type-row"><span id="vts-typed" class="vts-typed">specialty leasing</span><span class="vts-cursor" aria-hidden="true"></span></span>
+      </h1>
+      <p class="lead">Crenex connects the entire short-term leasing journey — from space discovery and enquiries to bookings, agreements, billing and AI-powered operations — across every asset in your portfolio.</p>
+      <div class="button-row"><a class="btn btn-primary" href="demo.html">Book a demo</a><a class="btn btn-secondary" href="platform.html">Explore the platform</a></div>
+      <div class="hero-note"><span class="dot"></span><span>Built for shopping centres, retail portfolios and teams managing non-standard occupancy.</span></div>
     </div>
   </section>
 
@@ -300,6 +315,50 @@
   </div>
   <div class="container footer-bottom"><span>© 2026 Crenex. All rights reserved.</span><span>MRI Software Partner &amp; Reseller</span></div>
 </footer>
+
+<script>
+(() => {
+  const phrases = [
+    'specialty leasing',
+    'space listing',
+    'enquiry management',
+    'booking workflows',
+    'agreements & compliance',
+    'invoicing & finance',
+    'AI-powered operations'
+  ];
+  const el = document.getElementById('vts-typed');
+  if (!el) return;
+  let phraseIndex = 0;
+  let charIndex = phrases[0].length;
+  let deleting = false;
+  function tick(){
+    const current = phrases[phraseIndex];
+    if(!deleting){
+      if(charIndex < current.length){
+        charIndex++;
+        el.textContent = current.slice(0,charIndex);
+        setTimeout(tick,55);
+      } else {
+        deleting = true;
+        setTimeout(tick,1500);
+      }
+    } else {
+      if(charIndex > 0){
+        charIndex--;
+        el.textContent = current.slice(0,charIndex);
+        setTimeout(tick,28);
+      } else {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        charIndex = 0;
+        setTimeout(tick,260);
+      }
+    }
+  }
+  setTimeout(tick,1500);
+})();
+</script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>
