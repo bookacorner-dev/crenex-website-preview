@@ -1,0 +1,140 @@
+name: One-time VTS hero preview
+
+on:
+  push:
+    branches:
+      - preview/vts-style-hero
+    paths:
+      - .github/workflows/one-time-vts-hero-preview.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: preview/vts-style-hero
+          fetch-depth: 0
+      - name: Replace homepage hero only
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          hero = '''  <section class="hero vts-hero">
+    <div class="hero-grid-bg"></div>
+    <div class="vts-hero-glow" aria-hidden="true"></div>
+    <div class="container vts-hero-inner">
+      <p class="eyebrow">Short-term &amp; specialty leasing software</p>
+      <h1 class="vts-hero-title">
+        <span class="vts-fixed">The platform built for</span>
+        <span class="vts-type-row"><span id="vts-typed" class="vts-typed">specialty leasing</span><span class="vts-cursor" aria-hidden="true"></span></span>
+      </h1>
+      <p class="lead">Crenex connects the entire short-term leasing journey — from space discovery and enquiries to bookings, agreements, billing and AI-powered operations — across every asset in your portfolio.</p>
+      <div class="button-row"><a class="btn btn-primary" href="demo.html">Book a demo</a><a class="btn btn-secondary" href="platform.html">Explore the platform</a></div>
+      <div class="hero-note"><span class="dot"></span><span>Built for shopping centres, retail portfolios and teams managing non-standard occupancy.</span></div>
+    </div>
+  </section>
+'''
+
+          s, n = re.subn(
+              r'  <section class="hero">.*?</section>\n\n(?=  <section class="client-band")',
+              hero + '\n',
+              s,
+              count=1,
+              flags=re.S,
+          )
+          if n != 1:
+              raise SystemExit(f'Expected to replace exactly one hero, replaced {n}')
+
+          css = r'''
+/* Preview-only VTS-style homepage hero */
+.vts-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);min-height:745px}
+.vts-hero .hero-grid-bg{mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.58) 65%,transparent 100%)}
+.vts-hero-glow{position:absolute;width:720px;height:720px;border-radius:50%;right:-180px;top:-230px;background:radial-gradient(circle,rgba(255,255,255,.9) 0%,rgba(131,220,246,.15) 42%,rgba(49,95,189,.06) 62%,transparent 73%);pointer-events:none}
+.vts-hero-inner{position:relative;z-index:2;min-height:745px;display:flex;flex-direction:column;justify-content:center;padding:86px 0 98px;max-width:1120px;margin:0 auto}
+.vts-hero-inner>.eyebrow{display:inline-flex;width:max-content;padding:9px 13px;border-radius:10px;background:#dcf6ee;color:#18332e;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:850;margin-bottom:30px}
+.vts-hero-title{margin:0;max-width:1050px;font-size:clamp(62px,7.25vw,104px);line-height:.96;letter-spacing:-.065em;font-weight:835;padding-bottom:.08em}
+.vts-fixed{display:block}
+.vts-type-row{display:flex;align-items:baseline;min-height:1.28em;padding-bottom:.10em;margin-top:10px;white-space:nowrap;overflow:visible}
+.vts-typed{display:inline-block;line-height:1.04;padding-bottom:.08em;background:linear-gradient(90deg,#0aa27d 0%,#0d9eb9 34%,#315fbd 68%,#6752dd 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vts-cursor{display:inline-block;width:.055em;height:.84em;margin-left:.08em;background:#315fbd;transform:translateY(.06em);animation:vtsBlink .9s steps(1) infinite}
+@keyframes vtsBlink{0%,48%{opacity:1}49%,100%{opacity:0}}
+.vts-hero-inner>.lead{margin-top:34px;max-width:780px;color:#4b5870;font-size:clamp(19px,2.1vw,24px);line-height:1.5}
+.vts-hero-inner>.button-row{margin-top:34px}
+.vts-hero-inner>.hero-note{margin-top:38px}
+@media(max-width:900px){.vts-hero,.vts-hero-inner{min-height:680px}.vts-type-row{white-space:normal;min-height:1.45em}.vts-hero-title{font-size:clamp(52px,12vw,78px)}}
+'''
+
+          marker = '</style>'
+          if marker not in s:
+              raise SystemExit('Inline style closing tag not found')
+          s = s.replace(marker, css + '\n' + marker, 1)
+
+          js = r'''
+<script>
+(() => {
+  const phrases = [
+    'specialty leasing',
+    'space listing',
+    'enquiry management',
+    'booking workflows',
+    'agreements & compliance',
+    'invoicing & finance',
+    'AI-powered operations'
+  ];
+  const el = document.getElementById('vts-typed');
+  if (!el) return;
+  let phraseIndex = 0;
+  let charIndex = phrases[0].length;
+  let deleting = false;
+  function tick(){
+    const current = phrases[phraseIndex];
+    if(!deleting){
+      if(charIndex < current.length){
+        charIndex++;
+        el.textContent = current.slice(0,charIndex);
+        setTimeout(tick,55);
+      } else {
+        deleting = true;
+        setTimeout(tick,1500);
+      }
+    } else {
+      if(charIndex > 0){
+        charIndex--;
+        el.textContent = current.slice(0,charIndex);
+        setTimeout(tick,28);
+      } else {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        charIndex = 0;
+        setTimeout(tick,260);
+      }
+    }
+  }
+  setTimeout(tick,1500);
+})();
+</script>
+'''
+
+          app_script = '<script src="assets/js/app.js"></script>'
+          if app_script not in s:
+              raise SystemExit('app.js script marker not found')
+          s = s.replace(app_script, js + app_script, 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+          rm .github/workflows/one-time-vts-hero-preview.yml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/one-time-vts-hero-preview.yml
+          git commit -m "Preview VTS-style animated homepage hero"
+          git push origin preview/vts-style-hero
