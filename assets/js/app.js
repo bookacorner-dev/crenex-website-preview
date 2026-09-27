@@ -262,21 +262,4 @@
     selectCategory(new URLSearchParams(window.location.search).get('category') || 'all', false);
   });
 
-  const demoForm = document.querySelector('[data-demo-form]');
-  if(demoForm){
-    const status = demoForm.querySelector('.form-status');
-    const submitButton = demoForm.querySelector('button[type="submit"]');
-    const submitted = new URLSearchParams(window.location.search).get('submitted') === '1';
-    if(submitted && status){
-      status.textContent = 'Thank you — your demo request has been sent.';
-      status.setAttribute('role','status');
-    }
-    demoForm.addEventListener('submit', () => {
-      if(status) status.textContent = 'Sending your request…';
-      if(submitButton){
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending…';
-      }
-    });
-  }
 })();

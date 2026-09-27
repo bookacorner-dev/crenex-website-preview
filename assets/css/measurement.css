@@ -1,0 +1,7 @@
+.demo-confirmation[hidden],.analytics-choice[hidden]{display:none!important}
+.demo-confirmation{margin-top:32px;margin-bottom:20px;padding:28px;border:1px solid #99d5be;border-radius:20px;background:#ecfaf3;scroll-margin-top:100px}
+.demo-confirmation h2{font-size:clamp(24px,4vw,34px);line-height:1.2;max-width:800px}
+.demo-confirmation p{margin-top:12px;max-width:750px;font-size:17px;line-height:1.6}
+.demo-confirmation[data-state="unconfirmed"]{background:#f5f7fa;border-color:#c4cdd9}
+.demo-confirmation:focus{outline:2px solid #315fbd;outline-offset:4px}
+@media(max-width:760px){.demo-confirmation{padding:22px}}
