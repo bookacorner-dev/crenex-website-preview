@@ -7,6 +7,7 @@ const path = require('node:path');
 const { webcrypto } = require('node:crypto');
 const root = path.join(__dirname, '..');
 const demoCode = fs.readFileSync(path.join(root, 'assets/js/demo-form.js'), 'utf8');
+const analyticsCode = fs.readFileSync(path.join(root, 'assets/js/analytics.js'), 'utf8');
 const pendingKey = 'crenex.demo.pending.v1';
 const choiceKey = 'crenex.analytics.choice.v1';
 const sourceKey = 'crenex.analytics.source.v1';
@@ -75,4 +76,51 @@ test('offline and invalid forms do not submit or count leads', () => {
 test('blocked session storage does not prevent enquiries or pretend to verify success', () => {
   const d=demo({blocked:true}); assert.equal(d.form.emit('submit').prevented,undefined); assert.equal(new URL(d.form.elements._next.value).searchParams.get('submitted'),'1');
   const back=demo({query:'?submitted=1',blocked:true}); assert.equal(back.notice.dataset.state,'unconfirmed'); assert.deepEqual(back.calls,[]);
+});
+function analytics({choice,query='',hostname='crenex.io',referrer='',blocked=false}={}) {
+  const win=new Node(), document=new Node(), head=new Node(), body=new Node(), footer=new Node();
+  const local=storage(choice ? {[choiceKey]:JSON.stringify(choice)} : {},blocked), session=storage({},blocked);
+  const location=new URL('https://'+hostname+'/demo.html'+query); location.reload=()=>{location.reloaded=true;};
+  let panel;
+  document.title='Crenex demo'; document.referrer=referrer; document.cookie=''; document.head=head; document.body=body;
+  document.querySelector=selector=>selector.startsWith('link') ? {href:'https://crenex.io/demo.html'} : footer;
+  document.createElement=tag=>{
+    const node=new Node(); node.tagName=tag;
+    if(tag==='section') {
+      panel=node; const reject=Object.assign(new Node(),{dataset:{choice:'denied'}}), allow=Object.assign(new Node(),{dataset:{choice:'granted'}});
+      node.querySelectorAll=()=>[reject,allow]; node.querySelector=()=>reject;
+    }
+    return node;
+  };
+  // Supply a test ID to exercise consent independently from the external account setup.
+  const code=analyticsCode.replace(/const measurementId = '[^']*';/,"const measurementId = 'G-TEST123';");
+  vm.runInNewContext(code,{window:win,document,localStorage:local,sessionStorage:session,location,URL,Date:class extends Date{static now(){return time;}}});
+  return {win,head,body,footer,panel,local,session,location,document};
+}
+test('no tag or analytics events before consent, including after rejection',()=>{
+  const a=analytics(); assert.equal(a.head.children.length,0); assert.equal(a.panel.hidden,false); assert.equal(a.win.crenexAnalytics.track('generate_lead'),false); assert.equal(a.session.getItem(sourceKey),null);
+  a.panel.querySelectorAll()[0].emit('click'); assert.equal(a.head.children.length,0); assert.equal(a.panel.hidden,true);
+  const next=analytics({choice:{value:'denied',at:time-1000}}); assert.equal(next.head.children.length,0); assert.equal(next.panel.hidden,true);
+});
+test('consent loads one tag and canonical-only page data; form fields and unknown events are excluded',()=>{
+  const a=analytics({query:'?email=secret@example.com&submission=private-token&utm_source=google&utm_medium=cpc&utm_campaign=leasing_2026',referrer:'https://search.example/query?email=secret@example.com'});
+  a.panel.querySelectorAll()[1].emit('click'); assert.equal(a.head.children.length,1);
+  assert.equal(a.win.crenexAnalytics.track('generate_lead'),true); assert.equal(a.win.crenexAnalytics.track('email'),false);
+  const data=JSON.stringify(a.win.dataLayer); assert.equal(data.includes('secret'),false); assert.equal(data.includes('private-token'),false); assert.equal(data.includes('leasing_2026'),true);
+  assert.equal(a.win.crenexAnalytics.attribution().landing_page,'/demo.html');
+  a.panel.querySelectorAll()[1].emit('click'); assert.equal(a.head.children.length,1);
+});
+test('revoking consent disables analytics and clears source context',()=>{
+  const a=analytics({choice:{value:'granted',at:time-1000}}); assert.equal(a.head.children.length,1);
+  a.panel.querySelectorAll()[0].emit('click'); assert.equal(a.win['ga-disable-G-TEST123'],true); assert.equal(a.win.crenexAnalytics.track('generate_lead'),false); assert.equal(a.session.getItem(sourceKey),null); assert.equal(a.location.reloaded,true);
+});
+test('expired, malformed or future consent is not accepted',()=>{
+  for(const choice of [{value:'granted',at:time-181*86400000},{value:'granted',at:time+1000},{value:'surprise',at:time}]) {
+    const a=analytics({choice}); assert.equal(a.head.children.length,0); assert.equal(a.panel.hidden,false);
+  }
+});
+test('local preview never sends Analytics and unusual campaign values are not forwarded',()=>{
+  const local=analytics({hostname:'localhost',choice:{value:'granted',at:time-1000}}); assert.equal(local.head.children.length,0);
+  const a=analytics({query:'?utm_source=person@example.com&utm_campaign=Alice%20Smith',choice:{value:'granted',at:time-1000}});
+  assert.equal(JSON.stringify(a.win.dataLayer).includes('Alice'),false); assert.equal(JSON.stringify(a.win.dataLayer).includes('person@'),false);
 });
