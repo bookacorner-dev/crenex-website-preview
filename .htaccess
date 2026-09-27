@@ -36,8 +36,9 @@ RewriteRule ^ https://crenex.io%{REQUEST_URI} [L,R=301]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
   # CSP: el sitio usa estilos inline -> 'unsafe-inline' acotado a style-src.
-  # script-src queda en 'self'. form-action habilita el POST del demo a FormSubmit.
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'"
+  # Google Analytics se carga solo tras consentimiento; sin inline/eval ni endpoints publicitarios.
+  # form-action conserva el POST nativo de FormSubmit con CAPTCHA.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; form-action 'self' https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'"
 </IfModule>
 
 # --- Cache de assets estáticos ---
