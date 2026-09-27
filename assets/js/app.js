@@ -32,8 +32,8 @@
 
   const current = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(link => {
-    const href = (link.getAttribute('href') || '').split('#')[0];
-    if(href === current){
+    const path = new URL(link.href, location.href).pathname;
+    if(path === location.pathname){
       link.classList.add('active');
       link.setAttribute('aria-current','page');
     }
@@ -76,16 +76,16 @@
             <p class="eyebrow">Recognition</p>
             <h2>Named MRI Partner of the Year.</h2>
             <p class="lead">In 2026, MRI Software recognised Crenex as its APAC Partner of the Year — reflecting the strength of our partnership and the work being delivered across casual leasing operations in the region.</p>
-            <a class="text-link" href="mri-integration.html">Explore our MRI partnership →</a>
+            <a class="text-link" href="/mri-integration.html">Explore our MRI partnership →</a>
           </div>
           <div class="partner-lockup">
             <div class="partner-orbit" aria-hidden="true"></div>
             <div class="partner-badge">APAC Partner of the Year · 2026</div>
             <div class="partner-card">
               <div class="partner-logos">
-                <div class="partner-logo partner-logo--mri"><img src="assets/logos/mri-software-color.svg" alt="MRI Software"/></div>
+                <div class="partner-logo partner-logo--mri"><img src="/assets/logos/mri-software-color.svg" alt="MRI Software"/></div>
                 <div class="partner-times" aria-hidden="true">×</div>
-                <div class="partner-logo partner-logo--crenex"><img src="assets/brand/crenex-logo-ink.svg" alt="Crenex"/></div>
+                <div class="partner-logo partner-logo--crenex"><img src="/assets/brand/crenex-logo-ink.svg" alt="Crenex"/></div>
               </div>
               <div class="partner-rule"></div>
               <div class="partner-award-copy"><strong>2026 APAC Partner of the Year</strong><span>Recognised by MRI Software</span></div>

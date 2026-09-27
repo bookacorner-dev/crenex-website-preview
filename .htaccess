@@ -4,10 +4,29 @@
 # propio .html. Un rewrite global rompería las páginas internas.
 # ============================================================
 
-# --- HTTPS forzado ---
+# --- Rutas de la versión anterior -> páginas actuales ---
+# Destinos HTTPS canónicos y query strings conservadas, sin cadenas de saltos.
 RewriteEngine On
+RewriteRule ^solutions/crm/?$ https://crenex.io/workflow.html [R=301,L]
+RewriteRule ^solutions/listing/?$ https://crenex.io/listing.html [R=301,L]
+RewriteRule ^solutions/ai-agent/?$ https://crenex.io/ai-agent.html [R=301,L]
+RewriteRule ^industries/(retail|residential|offices|advertising)/?$ https://crenex.io/industries.html [R=301,L]
+RewriteRule ^partnerships/mri/?$ https://crenex.io/mri-integration.html [R=301,L]
+
+# Alias sin extensión, incluido /blog/ (directorio físico sin index).
+RewriteRule ^(platform|workflow|listing|ai-agent|industries|customers|roi-calculator|mri-integration|blog|trust|demo|privacy-policy|terms-and-conditions)/?$ https://crenex.io/$1.html [R=301,L]
+
+# Solo artículos existentes: los slugs desconocidos siguen devolviendo 404.
+RewriteRule ^blog/(specialty-leasing-in-the-u-s-2026|casual-mall-leasing-in-australia-2026|crenex-and-mri-software-official-partners-in-short-term-leasing-management|trends-in-the-short-term-leasing-market-key-insights-for-2026|complete-guide-to-optimizing-lease-management-in-shopping-centers|checklist-is-your-shopping-mall-ready-for-digital-transformation)/?$ https://crenex.io/blog/$1.html [R=301,L]
+
+# THE_REQUEST evita redirigir la resolución interna de / a index.html.
+RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
+RewriteRule ^index\.html$ https://crenex.io/ [R=301,L]
+
+# --- Origen canónico: HTTPS y sin www ---
+RewriteCond %{HTTP_HOST} ^www\.crenex\.io$ [NC,OR]
 RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule ^ https://crenex.io%{REQUEST_URI} [L,R=301]
 
 # --- Cabeceras de seguridad ---
 <IfModule mod_headers.c>
@@ -34,5 +53,5 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
-# --- Fallback 404 suave (no es un rewrite global) ---
-ErrorDocument 404 /index.html
+# --- Error real con navegación independiente de la URL solicitada ---
+ErrorDocument 404 /404.html
