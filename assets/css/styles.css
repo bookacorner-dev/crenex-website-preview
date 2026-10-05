@@ -140,11 +140,11 @@ img{max-width:100%;display:block}.container{width:min(calc(100% - 48px),var(--ma
 .client-band{background:#fff;border-bottom:1px solid var(--line)}
 .client-band .container{display:grid;grid-template-columns:158px 1fr;gap:24px;align-items:center;padding-top:28px;padding-bottom:28px}
 .client-band p{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:850;color:#768196}
-.approved-logos{display:grid;grid-template-columns:repeat(6,minmax(68px,1fr));gap:14px;align-items:center}
-.approved-logo{height:42px;display:grid;place-items:center;padding:4px 8px;filter:grayscale(1) brightness(.3);opacity:.78;transition:.18s var(--ease)}
+.approved-logos{display:grid;grid-template-columns:repeat(7,minmax(68px,1fr));gap:14px;align-items:center}
+.approved-logo{min-width:0;height:42px;display:grid;place-items:center;padding:4px 8px;filter:grayscale(1) brightness(.3);opacity:.78;transition:.18s var(--ease)}
 .approved-logo:hover{filter:grayscale(1) brightness(.18);opacity:1}
-.approved-logo img{max-height:29px;width:auto;max-width:108px;object-fit:contain}
-.approved-logo.cbre img{max-height:24px}.approved-logo.ispt img{max-height:36px}
+.approved-logo img{height:auto;max-height:29px;width:auto;max-width:min(108px,100%);object-fit:contain}
+.approved-logo.cbre img{max-height:24px}.approved-logo.ispt img,.approved-logo.urbis img{max-height:36px}
 .approved-logo.mri{border-left:1px solid var(--line);position:relative;padding-left:18px}
 .approved-logo.mri:after{content:"Partner";position:absolute;left:18px;right:0;bottom:-11px;text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#8994a8;font-weight:850}
 .tour{background:linear-gradient(180deg,#fff 0%,#f3f7ff 100%)}
@@ -246,6 +246,7 @@ img{max-width:100%;display:block}.container{width:min(calc(100% - 48px),var(--ma
   .site-nav{visibility:hidden}.nav-open .site-nav{visibility:visible}
   .client-band .container{grid-template-columns:1fr;gap:18px}
   .approved-logos{grid-template-columns:repeat(3,1fr)}
+  .approved-logo.mri{grid-column:1 / -1;border-left:0;padding-left:8px}
   .tour-shell{grid-template-columns:1fr}
   .tour-tabs{position:relative;top:auto;display:flex;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
   .tour-tab{white-space:nowrap;min-width:max-content}
@@ -786,7 +787,7 @@ td strong{color:var(--brand-text)}
 }
 @media(max-width:640px){
   .hero:before{width:78vw;right:-28vw;top:20%}
-  .approved-logo img{max-width:96px}
+  .approved-logo img{max-width:min(96px,100%)}
   .exact-screen{border-radius:22px;padding:7px}
   .exact-screen-viewport{border-radius:16px}
 }
@@ -1429,7 +1430,7 @@ body:before{
 .mri-lockup--on-light img{filter:brightness(0)}
 .mri-lockup--on-light span{color:var(--brand-text-3)}
 .mri-lockup--on-dark span{color:var(--hybrid-text-3)}
-.approved-logo.mri img{max-height:36px;max-width:74px}
+.approved-logo.mri img{max-height:36px;max-width:min(74px,100%)}
 
 .roi-feature{
   overflow:hidden;
